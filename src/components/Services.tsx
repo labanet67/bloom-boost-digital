@@ -1,4 +1,5 @@
-import { Users, Target, Video, Handshake } from "lucide-react";
+import { Link } from "react-router-dom";
+import { Users, Target, Video, Handshake, ArrowRight } from "lucide-react";
 
 const services = [
   {
@@ -6,24 +7,28 @@ const services = [
     title: "Social Growth",
     description: "Organic & paid strategies to build an engaged, loyal community that converts.",
     color: "primary",
+    href: "/services/social-growth",
   },
   {
     icon: Target,
     title: "Paid Ads",
     description: "High-ROI campaigns on Meta, TikTok & Google that turn clicks into customers.",
     color: "accent",
+    href: "/services/paid-ads",
   },
   {
     icon: Video,
     title: "Content Studio",
     description: "Scroll-stopping Reels, UGC, and product content that drives engagement.",
     color: "secondary",
+    href: "/services/content-studio",
   },
   {
     icon: Handshake,
     title: "Influencer Partnerships",
     description: "Strategic creator collaborations that amplify your brand authentically.",
     color: "success",
+    href: "/services/influencer-marketing",
   },
 ];
 
@@ -77,16 +82,21 @@ const Services = () => {
           {services.map((service, index) => {
             const colors = colorClasses[service.color as keyof typeof colorClasses];
             return (
-              <div
+              <Link
                 key={index}
-                className={`group p-6 rounded-2xl bg-card border ${colors.border} ${colors.hover} transition-all duration-300 hover-lift`}
+                to={service.href}
+                className={`group p-6 rounded-2xl bg-card border ${colors.border} ${colors.hover} transition-all duration-300 hover-lift block`}
               >
                 <div className={`w-14 h-14 rounded-xl ${colors.bg} flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300`}>
                   <service.icon className={`w-7 h-7 ${colors.text}`} />
                 </div>
                 <h3 className="font-heading text-xl font-bold mb-3">{service.title}</h3>
-                <p className="text-muted-foreground leading-relaxed">{service.description}</p>
-              </div>
+                <p className="text-muted-foreground leading-relaxed mb-4">{service.description}</p>
+                <span className={`inline-flex items-center gap-1 text-sm font-semibold ${colors.text} group-hover:gap-2 transition-all`}>
+                  Learn more
+                  <ArrowRight className="w-4 h-4" />
+                </span>
+              </Link>
             );
           })}
         </div>
